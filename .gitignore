@@ -1,0 +1,10 @@
+node_modules
+dist
+.cache
+# testing
+coverage
+
+# production
+build
+dist
+.cache
