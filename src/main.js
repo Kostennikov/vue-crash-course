@@ -8,16 +8,6 @@ Vue.config.productionTip = false
 import Main from '@/components/Main'
 import About from '@/components/About'
 
-
-//alsdfjsal;jfslfj
-
-
-
-
-
-
-
-
 const routes = [
 
   { path: '/', component: Main},
