@@ -13,27 +13,16 @@
 
         <button id="send" @click="sendFiles">send</button>
         <div id="output">
-          <h2>Last optimized</h2>
-          <div v-for="file in filesReversed" :key="file.id">
-            <h1 v-if="progress === 100">Completed</h1>
-            <h1 v-else>Not Completed</h1>
-            <img
-              :src="file.base64 || file.link"
-              alt
-              :class="['image', {'image_ok':file.status=='ok','image_bad':file.status=='bad'}]"
-            />
-            <div class="progress" :style="'width: '+progress+'%'" v-if="showProgress"></div>
-            <!-- <ProgressBar />
-           -->
-            <p>{{file.name}}</p>
-          </div>
+
         </div>
       </div>
     </section>
 
     <div class="gallery">
       <ul>
-        <Gallery />
+        <Gallery
+        :files="files"
+        />
       </ul>
     </div>
   </div>
@@ -60,46 +49,40 @@ export default {
   props: ["progress"],
   data() {
     return {
-      files: [
-        // {
-        //   link: "http://deareditor.ru/rvk/images/to-numbers.png",
-        //   name: "fghjk"
-        // }
-      ]
+      files: [],
+      info: {
+        base64: 'base64'
+      }
     };
   },
-  computed: {
-    filesReversed: function() {
-      return this.files.slice().reverse();
-    }
-  },
+
   methods: {
     
     fileChange: function(event) {
-      var input = event.target;
-      for (var i = 0, l = input.files.length; i < l; i++) {
+      let input = event.target;
+      for (let i = 0, l = input.files.length; i < l; i++) {
         this.prepareFile(input.files[i]);
       }
     },
     prepareFile: function(file) {
-      var reader = new FileReader(),
+      let reader = new FileReader(),
         info = { binaryFile: file, name: file.name };
       this.files.push(info);
 
       reader.addEventListener("load", function(event) {
-        var base64 = event.target.result;
+        let base64 = event.target.result;
         Vue.set(info, "base64", base64);
       });
       reader.readAsDataURL(file);
     },
     // sendFiles: function() {
-    //   for (var i = 0, l = this.files.length; i < l; i++) {
+    //   for (let i = 0, l = this.files.length; i < l; i++) {
     //     Vue.set(this.files[i], "status","ok");
     //   }
     // },
 
     sendFiles: function() {
-      // for (var i = 0, l = this.files.length; i < l; i++) {
+      // for (let i = 0, l = this.files.length; i < l; i++) {
       //   Vue.set(this.files[i], "status", "progress");
       // }
 

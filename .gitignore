@@ -1,10 +1,10 @@
 node_modules
-dist
 .cache
+.idea
 # testing
 coverage
 
 # production
 build
-dist
 .cache
+.idea
